@@ -40,6 +40,8 @@ run_cpu_tasks_in_parallel(
                 "image 2 dpi": (300, "ecart", 0.0000001),
             },
         ),
+        # There is not one contour for the two pages,
+        # but one contour for each page.
         lambda: script.SeparatePage().treat_file(
             "2-pages-2-contours.png",
             {
@@ -56,6 +58,27 @@ run_cpu_tasks_in_parallel(
                 "image 2 crop y1": (241, "ecart", 5),
                 "image 2 crop x2": (2149, "ecart", 5),
                 "image 2 crop y2": (3239, "ecart", 5),
+                "image 1 dpi": (300, "ecart", 0.0000001),
+                "image 2 dpi": (300, "ecart", 0.0000001),
+            },
+        ),
+        # The right border is still there.
+        lambda: script.SeparatePage().treat_file(
+            "black-border-not-removed.png",
+            {
+                "separation contour double": (1, "ecart", 0),
+                "separation double page angle": (90.17, "ecart", 0.2),
+                "separation double page y=0": (2465, "pourcent", 0.002),
+                "page rotation 1": (-0.02, "ecart", 1),
+                "page rotation 2": (0.03, "ecart", 0.2),
+                "image 1 crop x1": (297, "ecart", 5),
+                "image 1 crop y1": (144, "ecart", 5),
+                "image 1 crop x2": (2309, "ecart", 5),
+                "image 1 crop y2": (3346, "ecart", 5),
+                "image 2 crop x1": (157, "ecart", 5),
+                "image 2 crop y1": (146, "ecart", 5),
+                "image 2 crop x2": (2167, "ecart", 5),
+                "image 2 crop y2": (3351, "ecart", 5),
                 "image 1 dpi": (300, "ecart", 0.0000001),
                 "image 2 dpi": (300, "ecart", 0.0000001),
             },
