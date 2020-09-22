@@ -8,13 +8,18 @@ script.DEBUG = False
 
 from multiprocessing import Process
 
+PARALLEL = False
 
 def run_cpu_tasks_in_parallel(tasks):
-    running_tasks = [Process(target=task) for task in tasks]
-    for running_task in running_tasks:
-        running_task.start()
-    for running_task in running_tasks:
-        running_task.join()
+    if PARALLEL:
+        running_tasks = [Process(target=task) for task in tasks]
+        for running_task in running_tasks:
+            running_task.start()
+        for running_task in running_tasks:
+            running_task.join()
+    else:
+        for task in tasks:
+            task()
 
 
 run_cpu_tasks_in_parallel(
