@@ -28,7 +28,6 @@ run_cpu_tasks_in_parallel(
         lambda: script.SeparatePage().treat_file(
             "0001.png",
             {
-                "separation contour double": (0, "ecart", 0),
                 "separation double page angle": (90.7, "ecart", 0.3),
                 "separation double page y=0": (2486, "pourcent", 0.005),
                 "page rotation 1": (0.68, "ecart", 0.2),
@@ -50,7 +49,6 @@ run_cpu_tasks_in_parallel(
         lambda: script.SeparatePage().treat_file(
             "2-pages-2-contours.png",
             {
-                "separation contour double": (1, "ecart", 0),
                 "separation double page angle": (90.3, "ecart", 0.3),
                 "separation double page y=0": (2494, "pourcent", 0.005),
                 "page rotation 1": (0.08, "ecart", 1),
@@ -71,7 +69,6 @@ run_cpu_tasks_in_parallel(
         lambda: script.SeparatePage().treat_file(
             "black-border-not-removed.png",
             {
-                "separation contour double": (1, "ecart", 0),
                 "separation double page angle": (90.17, "ecart", 0.3),
                 "separation double page y=0": (2465, "pourcent", 0.005),
                 "page rotation 1": (-0.02, "ecart", 1),
