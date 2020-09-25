@@ -65,7 +65,7 @@ run_cpu_tasks_in_parallel(
                 "image 2 dpi": (300, "ecart", 0.0000001),
             },
         ),
-        # The right border is still there.
+        # The border on the right is still there.
         lambda: script.SeparatePage().treat_file(
             "black-border-not-removed.png",
             {
@@ -81,6 +81,27 @@ run_cpu_tasks_in_parallel(
                 "image 2 crop y1": (146, "ecart", 10),
                 "image 2 crop x2": (2167, "ecart", 10),
                 "image 2 crop y2": (3351, "ecart", 10),
+                "image 1 dpi": (300, "ecart", 0.0000001),
+                "image 2 dpi": (300, "ecart", 0.0000001),
+            },
+        ),
+        # If AngleLimitStddev is too small, the angle to rotate the image
+        # can not be computed.
+        lambda: script.SeparatePage().treat_file(
+            "image_failed_to_rotate.png",
+            {
+                "separation double page angle": (90.54, "ecart", 0.3),
+                "separation double page y=0": (2576, "pourcent", 0.005),
+                "page rotation 1": (0.94, "ecart", 1),
+                "page rotation 2": (0.40, "ecart", 0.2),
+                "image 1 crop x1": (20, "ecart", 10),
+                "image 1 crop y1": (1562, "ecart", 10),
+                "image 1 crop x2": (21, "ecart", 10),
+                "image 1 crop y2": (1563, "ecart", 10),
+                "image 2 crop x1": (95, "ecart", 10),
+                "image 2 crop y1": (235, "ecart", 10),
+                "image 2 crop x2": (2174, "ecart", 10),
+                "image 2 crop y2": (3355, "ecart", 10),
                 "image 1 dpi": (300, "ecart", 0.0000001),
                 "image 2 dpi": (300, "ecart", 0.0000001),
             },
