@@ -71,7 +71,7 @@ run_cpu_tasks_in_parallel(
             {
                 "separation double page angle": (90.17, "ecart", 0.3),
                 "separation double page y=0": (2465, "pourcent", 0.005),
-                "page rotation 1": (-0.02, "ecart", 1),
+                "page rotation 1": (-0.02, "ecart", 0.2),
                 "page rotation 2": (0.03, "ecart", 0.2),
                 "image 1 crop x1": (297, "ecart", 10),
                 "image 1 crop y1": (144, "ecart", 10),
@@ -90,10 +90,10 @@ run_cpu_tasks_in_parallel(
         lambda: script.SeparatePage().treat_file(
             "image_failed_to_rotate.png",
             {
-                "separation double page angle": (90.54, "ecart", 0.3),
-                "separation double page y=0": (2576, "pourcent", 0.005),
-                "page rotation 1": (0.94, "ecart", 1),
-                "page rotation 2": (0.40, "ecart", 0.2),
+                "separation double page angle": (90.40, "ecart", 0.3),
+                "separation double page y=0": (2494, "pourcent", 0.005),
+                "page rotation 1": (0.45, "ecart", 0.2),
+                "page rotation 2": (0.33, "ecart", 0.2),
                 "image 1 crop x1": (20, "ecart", 10),
                 "image 1 crop y1": (1562, "ecart", 10),
                 "image 1 crop x2": (21, "ecart", 10),
