@@ -28,7 +28,7 @@ def test_0001_png() -> None:
             ConstString.separation_double_page_angle(): (
                 "range",
                 90.52,
-                90.55
+                90.55,
             ),
             ConstString.separation_double_page_y(): ("range", 2485, 2485),
             ConstString.page_rotation(1): ("range", 0.69, 0.73),
@@ -65,7 +65,7 @@ def test_2_pages_2_contours_png() -> None:
             ConstString.separation_double_page_angle(): (
                 "range",
                 90.22,
-                90.23
+                90.23,
             ),
             ConstString.separation_double_page_y(): ("range", 2487, 2487),
             ConstString.page_rotation(1): ("range", 0.0, 0.09),
@@ -100,7 +100,7 @@ def test_black_border_not_removed_png() -> None:
             ConstString.separation_double_page_angle(): (
                 "range",
                 89.96,
-                89.97
+                89.97,
             ),
             ConstString.separation_double_page_y(): ("range", 2454, 2454),
             ConstString.page_rotation(1): ("range", 0.0, 0.02),
@@ -128,16 +128,14 @@ def test_black_border_not_removed_png() -> None:
 
 
 def test_image_failed_to_rotate_png() -> None:
-    """If AngleLimitStddev is too small, the angle to rotate the image
-    can not be computed.
-    """
+    """Failed to compute angle to rotate. The image takes the whole page."""
     treat_file(
         "image_failed_to_rotate.png",
         {
             ConstString.separation_double_page_angle(): (
                 "range",
                 90.32,
-                90.33
+                90.33,
             ),
             ConstString.separation_double_page_y(): ("range", 2487, 2487),
             ConstString.page_rotation(1): ("range", 0.29, 0.41),
@@ -160,5 +158,42 @@ def test_image_failed_to_rotate_png() -> None:
             ConstString.image_border(2, 2): ("range", 159, 160),
             ConstString.image_border(2, 3): ("range", 189, 190),
             ConstString.image_border(2, 4): ("range", 189, 190),
+        },
+    )
+
+
+def test_image_failed_to_crop_data_png() -> None:
+    """Failed to detect edges. The image takes the whole page and is too closed
+    to the border of the image.
+    """
+    treat_file(
+        "image_failed_to_crop_data.png",
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                90.06,
+                90.07,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2484, 2484),
+            ConstString.page_rotation(1): ("range", -0.01, 0.01),
+            ConstString.page_rotation(2): ("range", 0.09, 0.11),
+            ConstString.image_crop(1, "x1"): ("range", 116, 116),
+            ConstString.image_crop(1, "y1"): ("range", 7, 7),
+            ConstString.image_crop(1, "x2"): ("range", 2476, 2476),
+            ConstString.image_crop(1, "y2"): ("range", 3503, 3503),
+            ConstString.image_crop(2, "x1"): ("range", 160, 160),
+            ConstString.image_crop(2, "y1"): ("range", 219, 219),
+            ConstString.image_crop(2, "x2"): ("range", 2237, 2237),
+            ConstString.image_crop(2, "y2"): ("range", 3349, 3349),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 5, 5),
+            ConstString.image_border(1, 2): ("range", 5, 5),
+            ConstString.image_border(1, 3): ("range", 55, 55),
+            ConstString.image_border(1, 4): ("range", 55, 55),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 211, 211),
+            ConstString.image_border(2, 2): ("range", 146, 146),
+            ConstString.image_border(2, 3): ("range", 191, 191),
+            ConstString.image_border(2, 4): ("range", 191, 191),
         },
     )
