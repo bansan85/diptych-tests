@@ -14,10 +14,11 @@ def treat_file(
     dict_default_values: Optional[
         Dict[str, Union[int, float, Tuple[int, int]]]
     ] = None,
+    enable_debug: bool = True,
 ) -> None:
     sep = script.SeparatePage()
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    sep.treat_file(filename, dict_test, dict_default_values, True)
+    sep.treat_file(filename, dict_test, dict_default_values, enable_debug)
 
 
 def test_0001_png() -> None:
@@ -197,3 +198,8 @@ def test_image_failed_to_crop_data_png() -> None:
             ConstString.image_border(2, 4): ("range", 191, 191),
         },
     )
+
+
+def test_disabled_enable_debug() -> None:
+    """Check that enable_debug=False works."""
+    treat_file("0001.png", enable_debug=False)
