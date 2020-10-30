@@ -1,5 +1,4 @@
 import unittest
-import pytest
 
 import numpy as np
 
@@ -126,9 +125,6 @@ def test_black_border_not_removed_png() -> None:
     )
 
 
-@pytest.mark.skip(
-    reason="wait next commit. Rotation fails with new threshold."
-)
 def test_image_failed_to_rotate_png() -> None:
     """Failed to compute angle to rotate. The image takes the whole page."""
     treat_file(
@@ -189,7 +185,7 @@ def test_image_failed_to_crop_data_png() -> None:
             ConstString.image_crop(1, "y2"): ("range", 3499, 3503),
             ConstString.image_crop(2, "x1"): ("range", 160, 167),
             ConstString.image_crop(2, "y1"): ("range", 218, 220),
-            ConstString.image_crop(2, "x2"): ("range", 2237, 2244),
+            ConstString.image_crop(2, "x2"): ("range", 2237, 2245),
             ConstString.image_crop(2, "y2"): ("range", 3348, 3350),
             ConstString.image_dpi(1): ("difference", 300, 0.0000001),
             ConstString.image_border(1, 1): ("range", 5, 11),
