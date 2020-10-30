@@ -1,6 +1,7 @@
 import unittest
 
 import numpy as np
+import pytest
 
 from script import treat_file, get_absolute_from_current_path
 from print_interface import ConstString
@@ -31,9 +32,9 @@ def test_0001_png() -> None:
             ConstString.image_crop(1, "y1"): ("range", 336, 337),
             ConstString.image_crop(1, "x2"): ("range", 2342, 2343),
             ConstString.image_crop(1, "y2"): ("range", 3222, 3223),
-            ConstString.image_crop(2, "x1"): ("range", 168, 171),
+            ConstString.image_crop(2, "x1"): ("range", 168, 175),
             ConstString.image_crop(2, "y1"): ("range", 649, 649),
-            ConstString.image_crop(2, "x2"): ("range", 2180, 2185),
+            ConstString.image_crop(2, "x2"): ("range", 2180, 2189),
             ConstString.image_crop(2, "y2"): ("range", 3360, 3361),
             ConstString.image_dpi(1): ("difference", 300, 0.0000001),
             ConstString.image_border(1, 1): ("range", 324, 326),
@@ -136,20 +137,20 @@ def test_image_failed_to_rotate_png() -> None:
                 90.32,
                 90.50,
             ),
-            ConstString.separation_double_page_y(): ("range", 2482, 2487),
+            ConstString.separation_double_page_y(): ("range", 2478, 2487),
             ConstString.page_rotation(1): ("range", 0.29, 0.41),
             ConstString.page_rotation(2): ("range", 0.34, 0.45),
-            ConstString.image_crop(1, "x1"): ("range", 77, 86),
-            ConstString.image_crop(1, "y1"): ("range", 1, 8),
+            ConstString.image_crop(1, "x1"): ("range", 77, 91),
+            ConstString.image_crop(1, "y1"): ("range", 1, 23),
             ConstString.image_crop(1, "x2"): ("range", 2456, 2481),
-            ConstString.image_crop(1, "y2"): ("range", 3483, 3486),
+            ConstString.image_crop(1, "y2"): ("range", 3483, 3501),
             ConstString.image_crop(2, "x1"): ("range", 170, 183),
             ConstString.image_crop(2, "y1"): ("range", 234, 235),
             ConstString.image_crop(2, "x2"): ("range", 2250, 2261),
             ConstString.image_crop(2, "y2"): ("range", 3355, 3356),
             ConstString.image_dpi(1): ("difference", 300, 0.0000001),
-            ConstString.image_border(1, 1): ("range", 12, 15),
-            ConstString.image_border(1, 2): ("range", 12, 15),
+            ConstString.image_border(1, 1): ("range", 4, 19),
+            ConstString.image_border(1, 2): ("range", 4, 19),
             ConstString.image_border(1, 3): ("range", 38, 55),
             ConstString.image_border(1, 4): ("range", 38, 55),
             ConstString.image_dpi(2): ("difference", 300, 0.0000001),
@@ -169,6 +170,47 @@ def test_image_failed_to_crop_data_png() -> None:
         MockDisableSeparatePage(MAX_VAL),
         get_absolute_from_current_path(
             __file__, "image_failed_to_crop_data.png"
+        ),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                90.06,
+                90.17,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2479, 2485),
+            ConstString.page_rotation(1): ("range", -0.01, 0.21),
+            ConstString.page_rotation(2): ("range", -0.01, 0.21),
+            ConstString.image_crop(1, "x1"): ("range", 52, 116),
+            ConstString.image_crop(1, "y1"): ("range", 3, 13),
+            ConstString.image_crop(1, "x2"): ("range", 2476, 2483),
+            ConstString.image_crop(1, "y2"): ("range", 3499, 3503),
+            ConstString.image_crop(2, "x1"): ("range", 159, 167),
+            ConstString.image_crop(2, "y1"): ("range", 218, 220),
+            ConstString.image_crop(2, "x2"): ("range", 2235, 2245),
+            ConstString.image_crop(2, "y2"): ("range", 3348, 3350),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 5, 11),
+            ConstString.image_border(1, 2): ("range", 5, 11),
+            ConstString.image_border(1, 3): ("range", 25, 58),
+            ConstString.image_border(1, 4): ("range", 25, 58),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 210, 212),
+            ConstString.image_border(2, 2): ("range", 145, 147),
+            ConstString.image_border(2, 3): ("range", 190, 192),
+            ConstString.image_border(2, 4): ("range", 190, 192),
+        },
+    )
+
+
+@pytest.mark.skip(reason="Value for brightness and constrast are hardcoded.")
+def test_wrong_angle_split_line_png() -> None:
+    """Failed to detect edges. The image takes the whole page and is too closed
+    to the border of the image.
+    """
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(
+            __file__, "wrong_angle_split_line.png"
         ),
         {
             ConstString.separation_double_page_angle(): (
