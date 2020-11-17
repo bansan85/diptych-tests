@@ -5,6 +5,7 @@ import numpy as np
 from script import treat_file, get_absolute_from_current_path
 from print_interface import ConstString
 from tests.mock_separate_page import MockDisableSeparatePage
+import cv2ext
 
 np.seterr(all="raise")
 tc = unittest.TestCase()
@@ -211,29 +212,37 @@ def test_wrong_angle_split_line_png() -> None:
         {
             ConstString.separation_double_page_angle(): (
                 "range",
-                90.20,
+                90.13,
                 90.22,
             ),
-            ConstString.separation_double_page_y(): ("range", 2484, 2484),
+            ConstString.separation_double_page_y(): ("range", 2482, 2484),
             ConstString.page_rotation(1): ("range", 0.19, 0.21),
             ConstString.page_rotation(2): ("range", -0.01, 0.01),
-            ConstString.image_crop(1, "x1"): ("range", 61, 61),
+            ConstString.image_crop(1, "x1"): ("range", 58, 61),
             ConstString.image_crop(1, "y1"): ("range", 8, 8),
-            ConstString.image_crop(1, "x2"): ("range", 2482, 2482),
-            ConstString.image_crop(1, "y2"): ("range", 3505, 3505),
-            ConstString.image_crop(2, "x1"): ("range", 165, 165),
+            ConstString.image_crop(1, "x2"): ("range", 2476, 2482),
+            ConstString.image_crop(1, "y2"): ("range", 3500, 3505),
+            ConstString.image_crop(2, "x1"): ("range", 162, 165),
             ConstString.image_crop(2, "y1"): ("range", 217, 217),
-            ConstString.image_crop(2, "x2"): ("range", 2248, 2248),
+            ConstString.image_crop(2, "x2"): ("range", 2245, 2248),
             ConstString.image_crop(2, "y2"): ("range", 3350, 3350),
             ConstString.image_dpi(1): ("difference", 300, 0.0000001),
-            ConstString.image_border(1, 1): ("range", 5, 5),
-            ConstString.image_border(1, 2): ("range", 5, 5),
-            ConstString.image_border(1, 3): ("range", 30, 30),
-            ConstString.image_border(1, 4): ("range", 30, 30),
+            ConstString.image_border(1, 1): ("range", 5, 8),
+            ConstString.image_border(1, 2): ("range", 5, 8),
+            ConstString.image_border(1, 3): ("range", 30, 31),
+            ConstString.image_border(1, 4): ("range", 30, 31),
             ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-            ConstString.image_border(2, 1): ("range", 196, 196),
-            ConstString.image_border(2, 2): ("range", 158, 158),
+            ConstString.image_border(2, 1): ("range", 195, 196),
+            ConstString.image_border(2, 2): ("range", 158, 159),
             ConstString.image_border(2, 3): ("range", 188, 188),
             ConstString.image_border(2, 4): ("range", 188, 188),
         },
+    )
+    tc.assertEqual(
+        cv2ext.charge_image(
+            get_absolute_from_current_path(
+                __file__, "wrong_angle_split_line.png_page_1.png"
+            )
+        ).shape[2],
+        3,
     )
