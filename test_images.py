@@ -325,3 +325,42 @@ def test_wrong_split_line_png() -> None:
             ConstString.image_border(2, 4): ("range", 174, 174),
         },
     )
+
+
+def test_crop_too_much_png() -> None:
+    """Reduce distance to ignore black area closed to the edge.
+    """
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(
+            __file__, "crop_too_much.png"
+        ),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                90.14,
+                90.15,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2457, 2457),
+            ConstString.page_rotation(1): ("range", -0.01, 0.01),
+            ConstString.page_rotation(2): ("range", 0.39, 0.41),
+            ConstString.image_crop(1, "x1"): ("range", 303, 303),
+            ConstString.image_crop(1, "y1"): ("range", 148, 148),
+            ConstString.image_crop(1, "x2"): ("range", 2313, 2313),
+            ConstString.image_crop(1, "y2"): ("range", 3351, 3351),
+            ConstString.image_crop(2, "x1"): ("range", 166, 166),
+            ConstString.image_crop(2, "y1"): ("range", 154, 154),
+            ConstString.image_crop(2, "x2"): ("range", 2180, 2180),
+            ConstString.image_crop(2, "y2"): ("range", 3360, 3360),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 116, 116),
+            ConstString.image_border(1, 2): ("range", 168, 168),
+            ConstString.image_border(1, 3): ("range", 225, 225),
+            ConstString.image_border(1, 4): ("range", 225, 225),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 95, 95),
+            ConstString.image_border(2, 2): ("range", 186, 186),
+            ConstString.image_border(2, 3): ("range", 223, 223),
+            ConstString.image_border(2, 4): ("range", 223, 223),
+        },
+    )
