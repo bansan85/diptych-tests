@@ -108,9 +108,9 @@ def test_black_border_not_removed_png() -> None:
             ConstString.image_crop(1, "y1"): ("range", 142, 144),
             ConstString.image_crop(1, "x2"): ("range", 2307, 2309),
             ConstString.image_crop(1, "y2"): ("range", 3346, 3347),
-            ConstString.image_crop(2, "x1"): ("range", 157, 159),
+            ConstString.image_crop(2, "x1"): ("range", 156, 159),
             ConstString.image_crop(2, "y1"): ("range", 144, 146),
-            ConstString.image_crop(2, "x2"): ("range", 2169, 2172),
+            ConstString.image_crop(2, "x2"): ("range", 2168, 2172),
             ConstString.image_crop(2, "y2"): ("range", 3351, 3353),
             ConstString.image_dpi(1): ("difference", 300, 0.0000001),
             ConstString.image_border(1, 1): ("range", 127, 129),
@@ -212,7 +212,7 @@ def test_wrong_angle_split_line_png() -> None:
         {
             ConstString.separation_double_page_angle(): (
                 "range",
-                90.13,
+                90.08,
                 90.22,
             ),
             ConstString.separation_double_page_y(): ("range", 2482, 2487),
@@ -220,17 +220,17 @@ def test_wrong_angle_split_line_png() -> None:
             ConstString.page_rotation(2): ("range", -0.01, 0.21),
             ConstString.image_crop(1, "x1"): ("range", 53, 61),
             ConstString.image_crop(1, "y1"): ("range", 7, 8),
-            ConstString.image_crop(1, "x2"): ("range", 2476, 2482),
+            ConstString.image_crop(1, "x2"): ("range", 2476, 2485),
             ConstString.image_crop(1, "y2"): ("range", 3500, 3505),
-            ConstString.image_crop(2, "x1"): ("range", 159, 165),
+            ConstString.image_crop(2, "x1"): ("range", 154, 165),
             ConstString.image_crop(2, "y1"): ("range", 217, 219),
-            ConstString.image_crop(2, "x2"): ("range", 2239, 2248),
+            ConstString.image_crop(2, "x2"): ("range", 2237, 2248),
             ConstString.image_crop(2, "y2"): ("range", 3348, 3350),
             ConstString.image_dpi(1): ("difference", 300, 0.0000001),
             ConstString.image_border(1, 1): ("range", 5, 8),
             ConstString.image_border(1, 2): ("range", 5, 8),
-            ConstString.image_border(1, 3): ("range", 26, 31),
-            ConstString.image_border(1, 4): ("range", 26, 31),
+            ConstString.image_border(1, 3): ("range", 24, 31),
+            ConstString.image_border(1, 4): ("range", 24, 31),
             ConstString.image_dpi(2): ("difference", 300, 0.0000001),
             ConstString.image_border(2, 1): ("range", 195, 208),
             ConstString.image_border(2, 2): ("range", 150, 159),
@@ -261,7 +261,7 @@ def test_angle_page_lower_split_line_png() -> None:
             ConstString.separation_double_page_angle(): (
                 "range",
                 89.73,
-                89.74,
+                89.75,
             ),
             ConstString.separation_double_page_y(): ("range", 2471, 2471),
             ConstString.page_rotation(1): ("range", -0.46, -0.44),
@@ -284,5 +284,44 @@ def test_angle_page_lower_split_line_png() -> None:
             ConstString.image_border(2, 2): ("range", 166, 166),
             ConstString.image_border(2, 3): ("range", 176, 176),
             ConstString.image_border(2, 4): ("range", 176, 176),
+        },
+    )
+
+
+def test_wrong_split_line_png() -> None:
+    """Improve choice of the split line between different algorithm.
+    """
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(
+            __file__, "wrong_split_line.png"
+        ),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                89.81,
+                89.82,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2465, 2465),
+            ConstString.page_rotation(1): ("range", -0.06, -0.04),
+            ConstString.page_rotation(2): ("range", 0.59, 0.61),
+            ConstString.image_crop(1, "x1"): ("range", 211, 211),
+            ConstString.image_crop(1, "y1"): ("range", 156, 156),
+            ConstString.image_crop(1, "x2"): ("range", 2323, 2323),
+            ConstString.image_crop(1, "y2"): ("range", 3363, 3363),
+            ConstString.image_crop(2, "x1"): ("range", 124, 124),
+            ConstString.image_crop(2, "y1"): ("range", 167, 167),
+            ConstString.image_crop(2, "x2"): ("range", 2236, 2236),
+            ConstString.image_crop(2, "y2"): ("range", 3373, 3373),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 180, 180),
+            ConstString.image_border(1, 2): ("range", 100, 100),
+            ConstString.image_border(1, 3): ("range", 174, 174),
+            ConstString.image_border(1, 4): ("range", 174, 174),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 129, 129),
+            ConstString.image_border(2, 2): ("range", 152, 152),
+            ConstString.image_border(2, 3): ("range", 174, 174),
+            ConstString.image_border(2, 4): ("range", 174, 174),
         },
     )
