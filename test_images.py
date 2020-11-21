@@ -289,13 +289,10 @@ def test_angle_page_lower_split_line_png() -> None:
 
 
 def test_wrong_split_line_png() -> None:
-    """Improve choice of the split line between different algorithm.
-    """
+    """Improve choice of the split line between different algorithm."""
     treat_file(
         MockDisableSeparatePage(MAX_VAL),
-        get_absolute_from_current_path(
-            __file__, "wrong_split_line.png"
-        ),
+        get_absolute_from_current_path(__file__, "wrong_split_line.png"),
         {
             ConstString.separation_double_page_angle(): (
                 "range",
@@ -328,13 +325,10 @@ def test_wrong_split_line_png() -> None:
 
 
 def test_crop_too_much_png() -> None:
-    """Reduce distance to ignore black area closed to the edge.
-    """
+    """Reduce distance to ignore black area closed to the edge."""
     treat_file(
         MockDisableSeparatePage(MAX_VAL),
-        get_absolute_from_current_path(
-            __file__, "crop_too_much.png"
-        ),
+        get_absolute_from_current_path(__file__, "crop_too_much.png"),
         {
             ConstString.separation_double_page_angle(): (
                 "range",
@@ -367,13 +361,12 @@ def test_crop_too_much_png() -> None:
 
 
 def test_crop_too_few_png() -> None:
-    """Reduce distance to ignore black area closed to the edge.
+    """Improve detection of black area to ignored
+    and that are closed to the edge.
     """
     treat_file(
         MockDisableSeparatePage(MAX_VAL),
-        get_absolute_from_current_path(
-            __file__, "crop_too_few.png"
-        ),
+        get_absolute_from_current_path(__file__, "crop_too_few.png"),
         {
             ConstString.separation_double_page_angle(): (
                 "range",
