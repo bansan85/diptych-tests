@@ -468,3 +468,39 @@ def test_wrong_split_line_2_png() -> None:
             ConstString.image_border(2, 4): ("range", 215, 215),
         },
     )
+
+
+def test_small_wave_png() -> None:
+    """The wave at the bottom of the image is very small."""
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(__file__, "small_wave.png"),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                90.61,
+                90.62,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2496, 2496),
+            ConstString.page_rotation(1): ("range", 0.69, 0.71),
+            ConstString.page_rotation(2): ("range", 0.74, 0.76),
+            ConstString.image_crop(1, "x1"): ("range", 322, 322),
+            ConstString.image_crop(1, "y1"): ("range", 199, 199),
+            ConstString.image_crop(1, "x2"): ("range", 2351, 2351),
+            ConstString.image_crop(1, "y2"): ("range", 3394, 3394),
+            ConstString.image_crop(2, "x1"): ("range", 134, 134),
+            ConstString.image_crop(2, "y1"): ("range", 224, 224),
+            ConstString.image_crop(2, "x2"): ("range", 2162, 2162),
+            ConstString.image_crop(2, "y2"): ("range", 3419, 3419),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 177, 177),
+            ConstString.image_border(1, 2): ("range", 115, 115),
+            ConstString.image_border(1, 3): ("range", 215, 215),
+            ConstString.image_border(1, 4): ("range", 215, 215),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 192, 192),
+            ConstString.image_border(2, 2): ("range", 100, 100),
+            ConstString.image_border(2, 3): ("range", 216, 216),
+            ConstString.image_border(2, 4): ("range", 216, 216),
+        },
+    )
