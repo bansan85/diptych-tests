@@ -652,3 +652,41 @@ def test_failed_split_line_line_algo_png() -> None:
             ConstString.image_border(2, 4): ("range", 1239, 1239),
         },
     )
+
+
+def test_failed_split_line_line_algo_2_png() -> None:
+    """Failed to compute line for split line with line detection alog."""
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(
+            __file__, "failed_split_line_line_algo_2.png"
+        ),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                89.97,
+                89.98,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2497, 2497),
+            ConstString.page_rotation(1): ("range", -0.01, 0.01),
+            ConstString.page_rotation(2): ("range", 0.59, 0.61),
+            ConstString.image_crop(1, "x1"): ("range", 272, 272),
+            ConstString.image_crop(1, "y1"): ("range", 149, 149),
+            ConstString.image_crop(1, "x2"): ("range", 2383, 2383),
+            ConstString.image_crop(1, "y2"): ("range", 3353, 3353),
+            ConstString.image_crop(2, "x1"): ("range", 122, 122),
+            ConstString.image_crop(2, "y1"): ("range", 155, 155),
+            ConstString.image_crop(2, "x2"): ("range", 2245, 2245),
+            ConstString.image_crop(2, "y2"): ("range", 3350, 3350),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 137, 137),
+            ConstString.image_border(1, 2): ("range", 146, 146),
+            ConstString.image_border(1, 3): ("range", 174, 174),
+            ConstString.image_border(1, 4): ("range", 174, 174),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 138, 138),
+            ConstString.image_border(2, 2): ("range", 154, 154),
+            ConstString.image_border(2, 3): ("range", 168, 168),
+            ConstString.image_border(2, 4): ("range", 168, 168),
+        },
+    )
