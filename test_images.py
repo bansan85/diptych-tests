@@ -576,3 +576,41 @@ def test_wrong_wave_split_line_png() -> None:
             ConstString.image_border(2, 4): ("range", 92, 92),
         },
     )
+
+
+def test_no_split_line_line_algo_png() -> None:
+    """No line for split line with line detection alog."""
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(
+            __file__, "no_split_line_line_algo.png"
+        ),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                89.46,
+                89.47,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2476, 2476),
+            ConstString.page_rotation(1): ("range", -0.16, -0.14),
+            ConstString.page_rotation(2): ("range", -0.46, -0.44),
+            ConstString.image_crop(1, "x1"): ("range", 205, 205),
+            ConstString.image_crop(1, "y1"): ("range", 158, 158),
+            ConstString.image_crop(1, "x2"): ("range", 2320, 2320),
+            ConstString.image_crop(1, "y2"): ("range", 3366, 3366),
+            ConstString.image_crop(2, "x1"): ("range", 185, 185),
+            ConstString.image_crop(2, "y1"): ("range", 221, 221),
+            ConstString.image_crop(2, "x2"): ("range", 2201, 2201),
+            ConstString.image_crop(2, "y2"): ("range", 3366, 3366),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 137, 137),
+            ConstString.image_border(1, 2): ("range", 142, 142),
+            ConstString.image_border(1, 3): ("range", 172, 172),
+            ConstString.image_border(1, 4): ("range", 172, 172),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 225, 225),
+            ConstString.image_border(2, 2): ("range", 117, 117),
+            ConstString.image_border(2, 3): ("range", 222, 222),
+            ConstString.image_border(2, 4): ("range", 222, 222),
+        },
+    )
