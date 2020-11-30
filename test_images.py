@@ -60,7 +60,7 @@ def test_2_pages_2_contours_png() -> None:
         {
             ConstString.separation_double_page_angle(): (
                 "range",
-                89.92,
+                89.91,
                 90.32,
             ),
             ConstString.separation_double_page_y(): ("range", 2486, 2492),
@@ -261,7 +261,7 @@ def test_angle_page_lower_split_line_png() -> None:
             ConstString.separation_double_page_angle(): (
                 "range",
                 89.71,
-                89.75,
+                89.76,
             ),
             ConstString.separation_double_page_y(): ("range", 2471, 2473),
             ConstString.page_rotation(1): ("range", -0.46, -0.39),
@@ -375,12 +375,12 @@ def test_crop_too_few_png() -> None:
             ),
             ConstString.separation_double_page_y(): ("range", 2508, 2511),
             ConstString.page_rotation(1): ("range", -0.76, -0.69),
-            ConstString.page_rotation(2): ("range", -0.01, 0.01),
+            ConstString.page_rotation(2): ("range", -0.01, 0.06),
             ConstString.image_crop(1, "x1"): ("range", 264, 265),
             ConstString.image_crop(1, "y1"): ("range", 151, 161),
             ConstString.image_crop(1, "x2"): ("range", 2375, 2376),
             ConstString.image_crop(1, "y2"): ("range", 3356, 3357),
-            ConstString.image_crop(2, "x1"): ("range", 138, 141),
+            ConstString.image_crop(2, "x1"): ("range", 135, 141),
             ConstString.image_crop(2, "y1"): ("range", 141, 141),
             ConstString.image_crop(2, "x2"): ("range", 2260, 2263),
             ConstString.image_crop(2, "y2"): ("range", 3345, 3345),
@@ -390,10 +390,10 @@ def test_crop_too_few_png() -> None:
             ConstString.image_border(1, 3): ("range", 174, 175),
             ConstString.image_border(1, 4): ("range", 174, 175),
             ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-            ConstString.image_border(2, 1): ("range", 130, 140),
-            ConstString.image_border(2, 2): ("range", 143, 153),
-            ConstString.image_border(2, 3): ("range", 169, 169),
-            ConstString.image_border(2, 4): ("range", 169, 169),
+            ConstString.image_border(2, 1): ("range", 130, 143),
+            ConstString.image_border(2, 2): ("range", 140, 153),
+            ConstString.image_border(2, 3): ("range", 167, 169),
+            ConstString.image_border(2, 4): ("range", 167, 169),
         },
     )
 
@@ -514,7 +514,7 @@ def test_wrong_split_line_3_png() -> None:
         {
             ConstString.separation_double_page_angle(): (
                 "range",
-                90.44,
+                90.43,
                 90.45,
             ),
             ConstString.separation_double_page_y(): ("range", 2498, 2498),
@@ -550,7 +550,7 @@ def test_wrong_wave_split_line_png() -> None:
         {
             ConstString.separation_double_page_angle(): (
                 "range",
-                90.53,
+                90.52,
                 90.54,
             ),
             ConstString.separation_double_page_y(): ("range", 2502, 2502),
@@ -589,7 +589,7 @@ def test_no_split_line_line_algo_png() -> None:
             ConstString.separation_double_page_angle(): (
                 "range",
                 89.46,
-                89.47,
+                89.48,
             ),
             ConstString.separation_double_page_y(): ("range", 2476, 2476),
             ConstString.page_rotation(1): ("range", -0.16, -0.14),
@@ -665,18 +665,18 @@ def test_failed_split_line_line_algo_2_png() -> None:
             ConstString.separation_double_page_angle(): (
                 "range",
                 89.97,
-                89.98,
+                90.0,
             ),
-            ConstString.separation_double_page_y(): ("range", 2497, 2497),
+            ConstString.separation_double_page_y(): ("range", 2497, 2498),
             ConstString.page_rotation(1): ("range", -0.01, 0.01),
             ConstString.page_rotation(2): ("range", 0.59, 0.61),
             ConstString.image_crop(1, "x1"): ("range", 272, 272),
             ConstString.image_crop(1, "y1"): ("range", 149, 149),
             ConstString.image_crop(1, "x2"): ("range", 2383, 2383),
             ConstString.image_crop(1, "y2"): ("range", 3353, 3353),
-            ConstString.image_crop(2, "x1"): ("range", 122, 122),
+            ConstString.image_crop(2, "x1"): ("range", 121, 122),
             ConstString.image_crop(2, "y1"): ("range", 155, 155),
-            ConstString.image_crop(2, "x2"): ("range", 2245, 2245),
+            ConstString.image_crop(2, "x2"): ("range", 2244, 2245),
             ConstString.image_crop(2, "y2"): ("range", 3350, 3350),
             ConstString.image_dpi(1): ("difference", 300, 0.0000001),
             ConstString.image_border(1, 1): ("range", 137, 137),
@@ -726,5 +726,81 @@ def test_crop_too_much_3_png() -> None:
             ConstString.image_border(2, 2): ("range", 106, 106),
             ConstString.image_border(2, 3): ("range", 223, 223),
             ConstString.image_border(2, 4): ("range", 223, 223),
+        },
+    )
+
+
+def test_wrong_wave_split_line_2_png() -> None:
+    """Need to relax tolerance to have the split line by wave algo."""
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(
+            __file__, "wrong_wave_split_line_2.png"
+        ),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                90.77,
+                90.78,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2490, 2490),
+            ConstString.page_rotation(1): ("range", 0.39, 0.41),
+            ConstString.page_rotation(2): ("range", 1.79, 1.81),
+            ConstString.image_crop(1, "x1"): ("range", 224, 224),
+            ConstString.image_crop(1, "y1"): ("range", 147, 147),
+            ConstString.image_crop(1, "x2"): ("range", 2337, 2337),
+            ConstString.image_crop(1, "y2"): ("range", 3355, 3355),
+            ConstString.image_crop(2, "x1"): ("range", 107, 107),
+            ConstString.image_crop(2, "y1"): ("range", 197, 197),
+            ConstString.image_crop(2, "x2"): ("range", 2229, 2229),
+            ConstString.image_crop(2, "y2"): ("range", 3396, 3396),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 126, 126),
+            ConstString.image_border(1, 2): ("range", 153, 153),
+            ConstString.image_border(1, 3): ("range", 173, 173),
+            ConstString.image_border(1, 4): ("range", 173, 173),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 170, 170),
+            ConstString.image_border(2, 2): ("range", 118, 118),
+            ConstString.image_border(2, 3): ("range", 169, 169),
+            ConstString.image_border(2, 4): ("range", 169, 169),
+        },
+    )
+
+
+def test_wrong_wave_split_line_3_png() -> None:
+    """Need to relax tolerance to have the split line by wave algo."""
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(
+            __file__, "wrong_wave_split_line_3.png"
+        ),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                90.05,
+                90.06,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2510, 2510),
+            ConstString.page_rotation(1): ("range", 0.09, 0.11),
+            ConstString.page_rotation(2): ("range", 0.34, 0.36),
+            ConstString.image_crop(1, "x1"): ("range", 272, 272),
+            ConstString.image_crop(1, "y1"): ("range", 219, 219),
+            ConstString.image_crop(1, "x2"): ("range", 2383, 2383),
+            ConstString.image_crop(1, "y2"): ("range", 3423, 3423),
+            ConstString.image_crop(2, "x1"): ("range", 119, 119),
+            ConstString.image_crop(2, "y1"): ("range", 226, 226),
+            ConstString.image_crop(2, "x2"): ("range", 2240, 2240),
+            ConstString.image_crop(2, "y2"): ("range", 3413, 3413),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 190, 190),
+            ConstString.image_border(1, 2): ("range", 93, 93),
+            ConstString.image_border(1, 3): ("range", 174, 174),
+            ConstString.image_border(1, 4): ("range", 174, 174),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 190, 190),
+            ConstString.image_border(2, 2): ("range", 110, 110),
+            ConstString.image_border(2, 3): ("range", 169, 169),
+            ConstString.image_border(2, 4): ("range", 169, 169),
         },
     )
