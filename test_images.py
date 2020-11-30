@@ -690,3 +690,41 @@ def test_failed_split_line_line_algo_2_png() -> None:
             ConstString.image_border(2, 4): ("range", 168, 168),
         },
     )
+
+
+def test_crop_too_much_3_png() -> None:
+    """Failed to compute line for split line with line detection alog."""
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(
+            __file__, "crop_too_much_3.png"
+        ),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                89.55,
+                89.56,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2499, 2499),
+            ConstString.page_rotation(1): ("range", -0.96, -0.94),
+            ConstString.page_rotation(2): ("range", -0.16, -0.14),
+            ConstString.image_crop(1, "x1"): ("range", 373, 373),
+            ConstString.image_crop(1, "y1"): ("range", 258, 258),
+            ConstString.image_crop(1, "x2"): ("range", 2386, 2386),
+            ConstString.image_crop(1, "y2"): ("range", 3458, 3458),
+            ConstString.image_crop(2, "x1"): ("range", 167, 167),
+            ConstString.image_crop(2, "y1"): ("range", 228, 228),
+            ConstString.image_crop(2, "x2"): ("range", 2180, 2180),
+            ConstString.image_crop(2, "y2"): ("range", 3417, 3417),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 237, 237),
+            ConstString.image_border(1, 2): ("range", 50, 50),
+            ConstString.image_border(1, 3): ("range", 223, 223),
+            ConstString.image_border(1, 4): ("range", 223, 223),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 192, 192),
+            ConstString.image_border(2, 2): ("range", 106, 106),
+            ConstString.image_border(2, 3): ("range", 223, 223),
+            ConstString.image_border(2, 4): ("range", 223, 223),
+        },
+    )
