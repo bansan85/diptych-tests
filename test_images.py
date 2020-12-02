@@ -842,3 +842,41 @@ def test_no_split_line_wave_algo_png() -> None:
             ConstString.image_border(2, 4): ("range", 191, 191),
         },
     )
+
+
+def test_no_split_line_wave_algo_2_png() -> None:
+    """Failed to detect wave due to missing wave at the bottom."""
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(
+            __file__, "no_split_line_wave_algo_2.png"
+        ),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                91.21,
+                91.22,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2488, 2488),
+            ConstString.page_rotation(1): ("range", 1.09, 1.11),
+            ConstString.page_rotation(2): ("range", 0.19, 0.21),
+            ConstString.image_crop(1, "x1"): ("range", 266, 266),
+            ConstString.image_crop(1, "y1"): ("range", 210, 210),
+            ConstString.image_crop(1, "x2"): ("range", 2342, 2342),
+            ConstString.image_crop(1, "y2"): ("range", 3413, 3413),
+            ConstString.image_crop(2, "x1"): ("range", 199, 199),
+            ConstString.image_crop(2, "y1"): ("range", 241, 241),
+            ConstString.image_crop(2, "x2"): ("range", 2282, 2282),
+            ConstString.image_crop(2, "y2"): ("range", 3433, 3433),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 180, 180),
+            ConstString.image_border(1, 2): ("range", 103, 103),
+            ConstString.image_border(1, 3): ("range", 192, 192),
+            ConstString.image_border(1, 4): ("range", 192, 192),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 209, 209),
+            ConstString.image_border(2, 2): ("range", 86, 86),
+            ConstString.image_border(2, 3): ("range", 188, 188),
+            ConstString.image_border(2, 4): ("range", 188, 188),
+        },
+    )
