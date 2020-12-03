@@ -880,3 +880,40 @@ def test_no_split_line_wave_algo_2_png() -> None:
             ConstString.image_border(2, 4): ("range", 188, 188),
         },
     )
+
+
+def test_crop_too_few_2_png() -> None:
+    """Use different area on the left and the right to detect
+    black noise."""
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(__file__, "crop_too_few_2.png"),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                90.25,
+                90.26,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2531, 2531),
+            ConstString.page_rotation(1): ("range", 1.19, 1.21),
+            ConstString.page_rotation(2): ("range", -0.11, -0.09),
+            ConstString.image_crop(1, "x1"): ("range", 287, 287),
+            ConstString.image_crop(1, "y1"): ("range", 165, 165),
+            ConstString.image_crop(1, "x2"): ("range", 2398, 2398),
+            ConstString.image_crop(1, "y2"): ("range", 3368, 3368),
+            ConstString.image_crop(2, "x1"): ("range", 145, 145),
+            ConstString.image_crop(2, "y1"): ("range", 188, 188),
+            ConstString.image_crop(2, "x2"): ("range", 2271, 2271),
+            ConstString.image_crop(2, "y2"): ("range", 3386, 3386),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 157, 157),
+            ConstString.image_border(1, 2): ("range", 127, 127),
+            ConstString.image_border(1, 3): ("range", 174, 174),
+            ConstString.image_border(1, 4): ("range", 174, 174),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 177, 177),
+            ConstString.image_border(2, 2): ("range", 112, 112),
+            ConstString.image_border(2, 3): ("range", 167, 167),
+            ConstString.image_border(2, 4): ("range", 167, 167),
+        },
+    )
