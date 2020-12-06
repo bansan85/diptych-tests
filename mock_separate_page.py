@@ -1,4 +1,6 @@
-from typing import Any, Optional, Tuple
+from typing import Optional, Tuple
+
+import numpy as np
 
 import script
 from page.split import SplitTwoWavesParameters
@@ -12,50 +14,50 @@ class MockDisableSeparatePage(script.SeparatePage):
 
     def split_two_waves(
         self,
-        image: Any,
+        image: np.ndarray,
         parameters: SplitTwoWavesParameters,
         enable_debug: Optional[str],
-    ) -> Tuple[Any, Any]:
+    ) -> Tuple[np.ndarray, np.ndarray]:
         if self.__stop_at > 0:
             return super().split_two_waves(image, parameters, enable_debug)
-        return (0, 0)
+        return (np.empty(0), np.empty(0))
 
     def unskew_page(
         self,
-        image: Any,
+        image: np.ndarray,
         n_page: int,
         parameters: UnskewPageParameters,
         enable_debug: Optional[str],
-    ) -> Any:
+    ) -> np.ndarray:
         if self.__stop_at > 1:
             return super().unskew_page(image, n_page, parameters, enable_debug)
-        return 0
+        return np.empty(0)
 
     def crop_around_data_in_page(
         self,
-        image: Any,
+        image: np.ndarray,
         n_page: int,
         parameters: CropAroundDataInPageParameters,
         enable_debug: Optional[str],
-    ) -> Tuple[Any, Tuple[int, int, int, int], int, int]:
+    ) -> Tuple[np.ndarray, Tuple[int, int, int, int], int, int]:
         if self.__stop_at > 2:
             return super().crop_around_data_in_page(
                 image, n_page, parameters, enable_debug
             )
-        return (0, (0, 0, 0, 0), 0, 0)
+        return (np.empty(0), (0, 0, 0, 0), 0, 0)
 
     def uncrop_to_fit_size(
         self,
-        image: Any,
+        image: np.ndarray,
         n_page: int,
         size_wh: Tuple[int, int],
         crop: Tuple[int, int, int, int],
-    ) -> Any:
+    ) -> np.ndarray:
         if self.__stop_at > 3:
             return super().uncrop_to_fit_size(image, n_page, size_wh, crop)
-        return 0
+        return np.empty(0)
 
-    def save_final_page(self, filename: str, image: Any) -> None:
+    def save_final_page(self, filename: str, image: np.ndarray) -> None:
         if self.__stop_at > 4:
             super().save_final_page(filename, image)
 
