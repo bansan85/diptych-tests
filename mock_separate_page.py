@@ -9,7 +9,7 @@ from page.crop import CropAroundDataInPageParameters
 
 
 class MockDisableSeparatePage(script.SeparatePage):
-    def __init__(self, stop_at: int = 99):
+    def __init__(self, stop_at: int = 99) -> None:
         self.__stop_at = stop_at
 
     def split_two_waves(
