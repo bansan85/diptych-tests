@@ -3,6 +3,7 @@ import unittest
 import fsext
 from script import SeparatePage, get_absolute_from_current_path, treat_file
 from tests.mock_separate_page import MockDisableSeparatePage
+from debug_image import DebugImage
 
 
 tc = unittest.TestCase()
@@ -22,7 +23,7 @@ def test_disabled_enable_debug() -> None:
     treat_file(
         SeparatePage(),
         get_absolute_from_current_path(__file__, "0001_debug.png"),
-        enable_debug=False,
+        debug=DebugImage(DebugImage.Level.OFF),
     )
     fsext.delete_file(
         get_absolute_from_current_path(__file__, "0001_debug.png")
@@ -44,17 +45,17 @@ def test_mock_stop_at_0() -> None:
     treat_file(
         MockDisableSeparatePage(0),
         get_absolute_from_current_path(__file__, "0001_0.png"),
-        enable_debug=True,
+        debug=DebugImage(DebugImage.Level.TOP),
     )
     fsext.delete_file(get_absolute_from_current_path(__file__, "0001_0.png"))
     tc.assertFalse(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_0.png_1_7.png")
+            get_absolute_from_current_path(__file__, "0001_0.png_1_1.png")
         )
     )
     tc.assertFalse(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_0.png_2_7.png")
+            get_absolute_from_current_path(__file__, "0001_0.png_2_1.png")
         )
     )
     tc.assertFalse(
@@ -69,12 +70,32 @@ def test_mock_stop_at_0() -> None:
     )
     tc.assertFalse(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_0.png_4_1_5.png")
+            get_absolute_from_current_path(__file__, "0001_0.png_4_1.png")
         )
     )
     tc.assertFalse(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_0.png_4_2_5.png")
+            get_absolute_from_current_path(__file__, "0001_0.png_5_1.png")
+        )
+    )
+    tc.assertFalse(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_0.png_6_1.png")
+        )
+    )
+    tc.assertFalse(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_0.png_6_2.png")
+        )
+    )
+    tc.assertFalse(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_0.png_7_1.png")
+        )
+    )
+    tc.assertFalse(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_0.png_7_2.png")
         )
     )
     tc.assertFalse(
@@ -104,17 +125,17 @@ def test_mock_stop_at_1() -> None:
     treat_file(
         MockDisableSeparatePage(1),
         get_absolute_from_current_path(__file__, "0001_1.png"),
-        enable_debug=True,
+        debug=DebugImage(DebugImage.Level.TOP),
     )
     fsext.delete_file(get_absolute_from_current_path(__file__, "0001_1.png"))
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_1.png_1_7.png")
+            get_absolute_from_current_path(__file__, "0001_1.png_1_1.png")
         )
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_1.png_2_7.png")
+            get_absolute_from_current_path(__file__, "0001_1.png_2_1.png")
         )
     )
     tc.assertTrue(
@@ -129,12 +150,32 @@ def test_mock_stop_at_1() -> None:
     )
     tc.assertFalse(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_1.png_4_1_5.png")
+            get_absolute_from_current_path(__file__, "0001_1.png_4_1.png")
         )
     )
     tc.assertFalse(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_1.png_4_2_5.png")
+            get_absolute_from_current_path(__file__, "0001_1.png_5_1.png")
+        )
+    )
+    tc.assertFalse(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_1.png_6_1.png")
+        )
+    )
+    tc.assertFalse(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_1.png_6_2.png")
+        )
+    )
+    tc.assertFalse(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_1.png_7_1.png")
+        )
+    )
+    tc.assertFalse(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_1.png_7_2.png")
         )
     )
     tc.assertFalse(
@@ -164,17 +205,17 @@ def test_mock_stop_at_2() -> None:
     treat_file(
         MockDisableSeparatePage(2),
         get_absolute_from_current_path(__file__, "0001_2.png"),
-        enable_debug=True,
+        debug=DebugImage(DebugImage.Level.TOP),
     )
     fsext.delete_file(get_absolute_from_current_path(__file__, "0001_2.png"))
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_2.png_1_7.png")
+            get_absolute_from_current_path(__file__, "0001_2.png_1_1.png")
         )
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_2.png_2_7.png")
+            get_absolute_from_current_path(__file__, "0001_2.png_2_1.png")
         )
     )
     tc.assertTrue(
@@ -189,12 +230,32 @@ def test_mock_stop_at_2() -> None:
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_2.png_4_1_5.png")
+            get_absolute_from_current_path(__file__, "0001_2.png_4_1.png")
         )
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_2.png_4_2_5.png")
+            get_absolute_from_current_path(__file__, "0001_2.png_5_1.png")
+        )
+    )
+    tc.assertFalse(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_2.png_6_1.png")
+        )
+    )
+    tc.assertFalse(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_2.png_6_2.png")
+        )
+    )
+    tc.assertFalse(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_2.png_7_1.png")
+        )
+    )
+    tc.assertFalse(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_2.png_7_2.png")
         )
     )
     tc.assertFalse(
@@ -224,17 +285,17 @@ def test_mock_stop_at_3() -> None:
     treat_file(
         MockDisableSeparatePage(3),
         get_absolute_from_current_path(__file__, "0001_3.png"),
-        enable_debug=True,
+        debug=DebugImage(DebugImage.Level.TOP),
     )
     fsext.delete_file(get_absolute_from_current_path(__file__, "0001_3.png"))
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_3.png_1_7.png")
+            get_absolute_from_current_path(__file__, "0001_3.png_1_1.png")
         )
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_3.png_2_7.png")
+            get_absolute_from_current_path(__file__, "0001_3.png_2_1.png")
         )
     )
     tc.assertTrue(
@@ -249,12 +310,32 @@ def test_mock_stop_at_3() -> None:
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_3.png_4_1_5.png")
+            get_absolute_from_current_path(__file__, "0001_3.png_4_1.png")
         )
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_3.png_4_2_5.png")
+            get_absolute_from_current_path(__file__, "0001_3.png_5_1.png")
+        )
+    )
+    tc.assertTrue(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_3.png_6_1.png")
+        )
+    )
+    tc.assertTrue(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_3.png_6_2.png")
+        )
+    )
+    tc.assertTrue(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_3.png_7_1.png")
+        )
+    )
+    tc.assertTrue(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_3.png_7_2.png")
         )
     )
     tc.assertFalse(
@@ -284,17 +365,17 @@ def test_mock_stop_at_4() -> None:
     treat_file(
         MockDisableSeparatePage(4),
         get_absolute_from_current_path(__file__, "0001_4.png"),
-        enable_debug=True,
+        debug=DebugImage(DebugImage.Level.TOP),
     )
     fsext.delete_file(get_absolute_from_current_path(__file__, "0001_4.png"))
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_4.png_1_7.png")
+            get_absolute_from_current_path(__file__, "0001_4.png_1_1.png")
         )
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_4.png_2_7.png")
+            get_absolute_from_current_path(__file__, "0001_4.png_2_1.png")
         )
     )
     tc.assertTrue(
@@ -309,12 +390,32 @@ def test_mock_stop_at_4() -> None:
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_4.png_4_1_5.png")
+            get_absolute_from_current_path(__file__, "0001_4.png_4_1.png")
         )
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_4.png_4_2_5.png")
+            get_absolute_from_current_path(__file__, "0001_4.png_5_1.png")
+        )
+    )
+    tc.assertTrue(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_4.png_6_1.png")
+        )
+    )
+    tc.assertTrue(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_4.png_6_2.png")
+        )
+    )
+    tc.assertTrue(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_4.png_7_1.png")
+        )
+    )
+    tc.assertTrue(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_4.png_7_2.png")
         )
     )
     tc.assertFalse(
@@ -344,17 +445,17 @@ def test_mock_stop_at_5() -> None:
     treat_file(
         MockDisableSeparatePage(5),
         get_absolute_from_current_path(__file__, "0001_5.png"),
-        enable_debug=True,
+        debug=DebugImage(DebugImage.Level.TOP),
     )
     fsext.delete_file(get_absolute_from_current_path(__file__, "0001_5.png"))
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_5.png_1_7.png")
+            get_absolute_from_current_path(__file__, "0001_5.png_1_1.png")
         )
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_5.png_2_7.png")
+            get_absolute_from_current_path(__file__, "0001_5.png_2_1.png")
         )
     )
     tc.assertTrue(
@@ -369,12 +470,32 @@ def test_mock_stop_at_5() -> None:
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_5.png_4_1_5.png")
+            get_absolute_from_current_path(__file__, "0001_5.png_4_1.png")
         )
     )
     tc.assertTrue(
         fsext.is_file_exists(
-            get_absolute_from_current_path(__file__, "0001_5.png_4_2_5.png")
+            get_absolute_from_current_path(__file__, "0001_5.png_5_1.png")
+        )
+    )
+    tc.assertTrue(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_5.png_6_1.png")
+        )
+    )
+    tc.assertTrue(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_5.png_6_2.png")
+        )
+    )
+    tc.assertTrue(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_5.png_7_1.png")
+        )
+    )
+    tc.assertTrue(
+        fsext.is_file_exists(
+            get_absolute_from_current_path(__file__, "0001_5.png_7_2.png")
         )
     )
     tc.assertTrue(

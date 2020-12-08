@@ -1,4 +1,4 @@
-from typing import Optional, Tuple
+from typing import Tuple
 
 import numpy as np
 
@@ -6,6 +6,7 @@ import script
 from page.split import SplitTwoWavesParameters
 from page.unskew import UnskewPageParameters
 from page.crop import CropAroundDataInPageParameters
+from debug_image import DebugImage
 
 
 class MockDisableSeparatePage(script.SeparatePage):
@@ -16,10 +17,10 @@ class MockDisableSeparatePage(script.SeparatePage):
         self,
         image: np.ndarray,
         parameters: SplitTwoWavesParameters,
-        enable_debug: Optional[str],
+        debug: DebugImage,
     ) -> Tuple[np.ndarray, np.ndarray]:
         if self.__stop_at > 0:
-            return super().split_two_waves(image, parameters, enable_debug)
+            return super().split_two_waves(image, parameters, debug)
         return (np.empty(0), np.empty(0))
 
     def unskew_page(
@@ -27,10 +28,10 @@ class MockDisableSeparatePage(script.SeparatePage):
         image: np.ndarray,
         n_page: int,
         parameters: UnskewPageParameters,
-        enable_debug: Optional[str],
+        debug: DebugImage,
     ) -> np.ndarray:
         if self.__stop_at > 1:
-            return super().unskew_page(image, n_page, parameters, enable_debug)
+            return super().unskew_page(image, n_page, parameters, debug)
         return np.empty(0)
 
     def crop_around_data_in_page(
@@ -38,11 +39,11 @@ class MockDisableSeparatePage(script.SeparatePage):
         image: np.ndarray,
         n_page: int,
         parameters: CropAroundDataInPageParameters,
-        enable_debug: Optional[str],
+        debug: DebugImage,
     ) -> Tuple[np.ndarray, Tuple[int, int, int, int], int, int]:
         if self.__stop_at > 2:
             return super().crop_around_data_in_page(
-                image, n_page, parameters, enable_debug
+                image, n_page, parameters, debug
             )
         return (np.empty(0), (0, 0, 0, 0), 0, 0)
 
