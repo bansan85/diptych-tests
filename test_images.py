@@ -918,7 +918,11 @@ def test_crop_too_few_2_png() -> None:
 
 
 def test_failed_detect_rectangle_png() -> None:
-    """Before, ."""
+    """Before, approxPolyDP algo was used to detect shape.
+
+    But, due to noise on the edge with background other pages,
+    the contour have lost of noise.
+    So use HoughLinesP to detect shape."""
     treat_file(
         MockDisableSeparatePage(MAX_VAL),
         get_absolute_from_current_path(
@@ -951,5 +955,43 @@ def test_failed_detect_rectangle_png() -> None:
             ConstString.image_border(2, 2): ("range", 95, 95),
             ConstString.image_border(2, 3): ("range", 188, 188),
             ConstString.image_border(2, 4): ("range", 188, 188),
+        },
+    )
+
+
+def test_single_page_png() -> None:
+    """Detect that the scan is single page."""
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(
+            __file__, "single_page.png"
+        ),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                89.97,
+                89.98,
+            ),
+            ConstString.separation_double_page_y(): ("range", 2469, 2469),
+            ConstString.page_rotation(1): ("range", -0.01, 0.01),
+            ConstString.page_rotation(2): ("range", -0.01, 0.01),
+            ConstString.image_crop(1, "x1"): ("range", 1, 1),
+            ConstString.image_crop(1, "y1"): ("range", 9, 9),
+            ConstString.image_crop(1, "x2"): ("range", 2464, 2464),
+            ConstString.image_crop(1, "y2"): ("range", 3505, 3505),
+            ConstString.image_crop(2, "x1"): ("range", 0, 0),
+            ConstString.image_crop(2, "y1"): ("range", 0, 0),
+            ConstString.image_crop(2, "x2"): ("range", 0, 0),
+            ConstString.image_crop(2, "y2"): ("range", 0, 0),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 6, 6),
+            ConstString.image_border(1, 2): ("range", 6, 6),
+            ConstString.image_border(1, 3): ("range", 9, 9),
+            ConstString.image_border(1, 4): ("range", 9, 9),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 0, 0),
+            ConstString.image_border(2, 2): ("range", 0, 0),
+            ConstString.image_border(2, 3): ("range", 0, 0),
+            ConstString.image_border(2, 4): ("range", 0, 0),
         },
     )
