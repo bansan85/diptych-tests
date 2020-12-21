@@ -1295,3 +1295,50 @@ def test_wrong_split_line_4_png() -> None:
             ConstString.image_border(2, 4): ("range", 219, 219),
         },
     )
+
+
+def test_failed_split_line_line_algo_3_png() -> None:
+    """get_rectangle_from_contour_hough_lines fails
+    because fewer than 4 lines are detected."""
+    treat_file(
+        MockDisableSeparatePage(MAX_VAL),
+        get_absolute_from_current_path(
+            __file__, "failed_split_line_line_algo_3.png"
+        ),
+        {
+            ConstString.separation_double_page_angle(): (
+                "range",
+                Angle.deg(89.99),
+                Angle.deg(90.01),
+            ),
+            ConstString.separation_double_page_y(): ("range", 40, 40),
+            ConstString.page_rotation(1): (
+                "range",
+                Angle.deg(-0.01),
+                Angle.deg(0.01),
+            ),
+            ConstString.page_rotation(2): (
+                "range",
+                Angle.deg(-0.01),
+                Angle.deg(0.01),
+            ),
+            ConstString.image_crop(1, "x1"): ("range", 0, 0),
+            ConstString.image_crop(1, "y1"): ("range", 0, 0),
+            ConstString.image_crop(1, "x2"): ("range", 0, 0),
+            ConstString.image_crop(1, "y2"): ("range", 0, 0),
+            ConstString.image_crop(2, "x1"): ("range", 246, 246),
+            ConstString.image_crop(2, "y1"): ("range", 154, 154),
+            ConstString.image_crop(2, "x2"): ("range", 2259, 2259),
+            ConstString.image_crop(2, "y2"): ("range", 3361, 3361),
+            ConstString.image_dpi(1): ("difference", 300, 0.0000001),
+            ConstString.image_border(1, 1): ("range", 0, 0),
+            ConstString.image_border(1, 2): ("range", 0, 0),
+            ConstString.image_border(1, 3): ("range", 0, 0),
+            ConstString.image_border(1, 4): ("range", 0, 0),
+            ConstString.image_dpi(2): ("difference", 300, 0.0000001),
+            ConstString.image_border(2, 1): ("range", 146, 146),
+            ConstString.image_border(2, 2): ("range", 134, 134),
+            ConstString.image_border(2, 3): ("range", 223, 223),
+            ConstString.image_border(2, 4): ("range", 223, 223),
+        },
+    )
