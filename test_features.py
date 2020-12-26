@@ -1,9 +1,9 @@
 import unittest
 
-import fsext
-from script import SeparatePage, get_absolute_from_current_path, treat_file
-from tests.mock_separate_page import MockDisableSeparatePage
 from debug_image import DebugImage
+import fsext
+from script import get_absolute_from_current_path, SeparatePage, treat_file
+from tests.mock_separate_page import MockDisableSeparatePage
 
 
 tc = unittest.TestCase()

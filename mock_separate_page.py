@@ -2,11 +2,11 @@ from typing import Tuple
 
 import numpy as np
 
-import script
+from debug_image import DebugImage
+from page.crop import CropAroundDataInPageParameters
 from page.split import SplitTwoWavesParameters
 from page.unskew import UnskewPageParameters
-from page.crop import CropAroundDataInPageParameters
-from debug_image import DebugImage
+import script
 
 
 class MockDisableSeparatePage(script.SeparatePage):

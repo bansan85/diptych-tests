@@ -2,11 +2,11 @@ import unittest
 
 import numpy as np
 
-from script import treat_file, get_absolute_from_current_path
-from print_interface import ConstString
-from tests.mock_separate_page import MockDisableSeparatePage
-import cv2ext
 from angle import Angle
+import cv2ext
+from print_interface import ConstString
+from script import get_absolute_from_current_path, treat_file
+from tests.mock_separate_page import MockDisableSeparatePage
 
 
 np.seterr(all="raise")
