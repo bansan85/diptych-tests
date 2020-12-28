@@ -1153,7 +1153,7 @@ def test_failed_detect_rectangle_png() -> None:
             ConstString.image_border(1, 3): ("range", 192, 192),
             ConstString.image_border(1, 4): ("range", 192, 192),
             ConstString.image_dpi(2): ("difference", 300, 0.0000001),
-            ConstString.image_border(2, 1): ("range", 200, 202),
+            ConstString.image_border(2, 1): ("range", 199, 202),
             ConstString.image_border(2, 2): ("range", 93, 95),
             ConstString.image_border(2, 3): ("range", 188, 188),
             ConstString.image_border(2, 4): ("range", 188, 188),
