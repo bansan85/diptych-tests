@@ -1,7 +1,9 @@
-from typing import Tuple
+import random
+from typing import Dict, Optional, Tuple, Union
 
 import numpy as np
 
+from angle import Angle
 from debug_image import DebugImage
 from page.crop import CropAroundDataInPageParameters
 from page.split import SplitTwoWavesParameters
@@ -10,8 +12,9 @@ import script
 
 
 class MockDisableSeparatePage(script.SeparatePage):
-    def __init__(self, stop_at: int = 99) -> None:
+    def __init__(self, stop_at: int = 99, fuzzing: bool = False) -> None:
         self.__stop_at = stop_at
+        self.__fuzzing = fuzzing
 
     def split_two_waves(
         self,
@@ -62,4 +65,37 @@ class MockDisableSeparatePage(script.SeparatePage):
         if self.__stop_at > 4:
             super().save_final_page(filename, image)
 
+    def treat_file(
+        self,
+        filename: str,
+        dict_test: Optional[
+            Dict[
+                str,
+                Union[
+                    Tuple[str, int, int],
+                    Tuple[str, float, float],
+                    Tuple[str, Angle, Angle],
+                ],
+            ]
+        ] = None,
+        dict_default_values: Optional[
+            Dict[str, Union[int, float, Tuple[int, int], Angle]]
+        ] = None,
+        debug: Optional[DebugImage] = None,
+    ) -> None:
+        if debug is None:
+            debug = DebugImage(DebugImage.Level.OFF)
+
+        if dict_default_values is None:
+            dict_default_values = {}
+
+        if self.__fuzzing:
+            dict_default_values["UnskewPageHoughLinesScale"] = random.uniform(
+                0.30, 1.0
+            )
+            print(filename, dict_default_values)
+
+        super().treat_file(filename, dict_test, dict_default_values, debug)
+
     __stop_at: int
+    __fuzzing: bool
