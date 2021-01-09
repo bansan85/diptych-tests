@@ -93,6 +93,9 @@ class MockDisableSeparatePage(script.SeparatePage):
             dict_default_values["UnskewPageHoughLinesScale"] = random.uniform(
                 0.30, 1.0
             )
+            dict_default_values[
+                "SplitTwoWavesHoughLinesScale"
+            ] = random.uniform(0.30, 1.0)
             print(filename, dict_default_values)
 
         super().treat_file(filename, dict_test, dict_default_values, debug)
