@@ -2,12 +2,11 @@ import unittest
 
 import numpy as np
 
-from angle import Angle
-import cv2ext
-from fsext import get_absolute_from_current_path
-from print_interface import ConstString
+from diptych.angle import Angle
+from diptych.cv2ext import charge_image
+from diptych.fsext import get_absolute_from_current_path
+from diptych.print_interface import ConstString
 from tests.mock_separate_page import MockDisableSeparatePage
-
 
 np.seterr(all="raise")
 tc = unittest.TestCase()
@@ -284,7 +283,7 @@ def test_wrong_angle_split_line_png() -> None:
         },
     )
     tc.assertEqual(
-        cv2ext.charge_image(
+        charge_image(
             get_absolute_from_current_path(
                 __file__, "wrong_angle_split_line.png_page_1.png"
             )

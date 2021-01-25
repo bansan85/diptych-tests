@@ -3,15 +3,15 @@ from typing import Dict, Optional, Tuple, Union
 
 import numpy as np
 
-from angle import Angle
-from debug_image import DebugImage
-from page.crop import CropAroundDataInPageParameters
-from page.split import SplitTwoWavesParameters
-from page.unskew import UnskewPageParameters
-import script
+from diptych.angle import Angle
+from diptych.crop import CropAroundDataInPageParameters
+from diptych.debug_image import DebugImage
+import diptych.script
+from diptych.split import SplitTwoWavesParameters
+from diptych.unskew import UnskewPageParameters
 
 
-class MockDisableSeparatePage(script.SeparatePage):
+class MockDisableSeparatePage(diptych.script.SeparatePage):
     def __init__(self, stop_at: int = 99, fuzzing: bool = False) -> None:
         self.__stop_at = stop_at
         self.__fuzzing = fuzzing

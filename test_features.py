@@ -1,7 +1,7 @@
 import unittest
 
-from debug_image import DebugImage
-from fsext import (
+from diptych.debug_image import DebugImage
+from diptych.fsext import (
     copy_file,
     del_pattern,
     delete_file,
@@ -9,9 +9,8 @@ from fsext import (
     get_absolute_from_current_path,
     is_file_exists,
 )
-from script import SeparatePage
-from tests.mock_separate_page import MockDisableSeparatePage
-
+from diptych.script import SeparatePage
+from .mock_separate_page import MockDisableSeparatePage
 
 tc = unittest.TestCase()
 
