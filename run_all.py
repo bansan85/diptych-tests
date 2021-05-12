@@ -56,17 +56,17 @@ if __name__ == "__main__":
     test_features.test_mock_stop_at_5()
     test_images.test_image_failed_to_rotate_png()
     execute("C:/Users/legar/Documents/GitHub/image/2004-1-0000.ppm")
-    f = open(
+    with open(
         "C:/Users/legar/Documents/GitHub/img-book/iti-0004.pbm_page_2.pdf",
         "wb",
-    )
-    f.write(
-        pytesseract.image_to_pdf_or_hocr(
-            "C:/Users/legar/Documents/GitHub/img-book/iti-0004.pbm_page_2.png",
-            lang="fra+equ",
+    ) as f:
+        f.write(
+            pytesseract.image_to_pdf_or_hocr(
+                "C:/Users/legar/Documents/GitHub/img-book/"
+                "iti-0004.pbm_page_2.png",
+                lang="fra+equ",
+            )
         )
-    )
-    f.close()
     types = (
         "C:/Users/legar/Documents/GitHub/img-book/*.ppm",
         "C:/Users/legar/Documents/GitHub/img-book/*.pbm",
